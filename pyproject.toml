@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "j2f5"
+version = "0.1.0"
+description = "j2cli extension for f5 use-cases"
+authors = ["Simon Kowallik"]
+license = "ISC"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+j2cli = "^0.3.10"
+
+[tool.poetry.dev-dependencies]
+black = "^20.8b1"
+pytest = "^6.2.1"
+pytest-cov = "^2.10.1"
+mkdocs = "^1.1.2"
+mkdocs-material = "^6.1.7"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
