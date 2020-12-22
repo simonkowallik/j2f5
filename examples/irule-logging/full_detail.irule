@@ -1,0 +1,45 @@
+# client-side
+when CLIENT_ACCEPTED {
+    set client_log_handle [IP::remote_addr].[TCP::remote_port]
+    log local0.info "[IP::remote_addr].[TCP::remote_port] connected"
+}
+when CLIENTSSL_HANDSHAKE {
+    log local0.info "$client_log_handle:> cipher details: name:[SSL::cipher name], version:[SSL::cipher version], bits:[SSL::cipher bits]"
+    set ext_count [SSL::extensions count]
+    log local0.debug "$client_log_handle:> SSL::extensions count = $ext_count"
+
+    for {set i 0} {$i<$ext_count} {incr i} {
+        binary scan [SSL::extensions -index $i] S1S1H* ext_type ext_len ext
+        set ext_type [expr {$ext_type & 0xffff}]
+        set ext_len [expr {$ext_len & 0xffff}]
+        log local0.debug "$client_log_handle:> SSL extension #[expr {$i + 1}]: (type $ext_type len $ext_len) $ext"
+    }
+}
+when HTTP_REQUEST {
+    log local0.info "$client_log_handle:> [HTTP::method] [HTTP::uri] HTTP/[HTTP::version]"
+    foreach http_header [HTTP::header names] {
+        log local0.debug "$client_log_handle:> $http_header: [HTTP::header value $http_header]"
+    }
+}
+# server-side
+when HTTP_RESPONSE {
+    log local0.info "$client_log_handle:> [HTTP::status] HTTP/[HTTP::version]"
+    foreach http_header [HTTP::header names] {
+        log local0.debug "$client_log_handle:> $http_header: [HTTP::header value $http_header]"
+    }
+}
+when SERVERSSL_HANDSHAKE {
+    log local0.info "$client_log_handle:> cipher details: name:[SSL::cipher name], version:[SSL::cipher version], bits:[SSL::cipher bits]"
+    set ext_count [SSL::extensions count]
+    log local0.debug "$client_log_handle:> SSL::extensions count = $ext_count"
+
+    for {set i 0} {$i<$ext_count} {incr i} {
+        binary scan [SSL::extensions -index $i] S1S1H* ext_type ext_len ext
+        set ext_type [expr {$ext_type & 0xffff}]
+        set ext_len [expr {$ext_len & 0xffff}]
+        log local0.debug "$client_log_handle:> SSL extension #[expr {$i + 1}]: (type $ext_type len $ext_len) $ext"
+    }
+}
+when SERVER_CONNECTED {
+    log local0.info "$client_log_handle:> [IP::remote_addr].[TCP::remote_port] connected"
+}

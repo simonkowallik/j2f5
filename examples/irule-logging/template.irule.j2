@@ -1,0 +1,69 @@
+{# iRule template for basic debugging of TCP, TLS and HTTP
+ # log level 0 (none), 1 (basic) and 2 (full detail) are available
+ # see the various yaml configuration examples
+ #}
+# client-side
+when CLIENT_ACCEPTED {
+    set client_log_handle [IP::remote_addr].[TCP::remote_port]
+    {% if tcp.log.level > 0 %}
+    log {{tcp.log.facility}}.info "[IP::remote_addr].[TCP::remote_port] connected"
+    {% endif %}
+}
+{% if tls.clientside.enable and tls.log.level > 0 %}
+when CLIENTSSL_HANDSHAKE {
+    log {{tls.log.facility}}.info "$client_log_handle:> cipher details: name:[SSL::cipher name], version:[SSL::cipher version], bits:[SSL::cipher bits]"
+    {% if tls.log.level > 1 %}
+    set ext_count [SSL::extensions count]
+    log {{tls.log.facility}}.debug "$client_log_handle:> SSL::extensions count = $ext_count"
+
+    for {set i 0} {$i<$ext_count} {incr i} {
+        binary scan [SSL::extensions -index $i] S1S1H* ext_type ext_len ext
+        set ext_type [expr {$ext_type & 0xffff}]
+        set ext_len [expr {$ext_len & 0xffff}]
+        log {{tls.log.facility}}.debug "$client_log_handle:> SSL extension #[expr {$i + 1}]: (type $ext_type len $ext_len) $ext"
+    }
+    {% endif %}
+}
+{% endif %}
+{% if http.log.level > 0 %}
+when HTTP_REQUEST {
+    log {{http.log.facility}}.info "$client_log_handle:> [HTTP::method] [HTTP::uri] HTTP/[HTTP::version]"
+    {% if http.log.level > 1 %}
+    foreach http_header [HTTP::header names] {
+        log {{http.log.facility}}.debug "$client_log_handle:> $http_header: [HTTP::header value $http_header]"
+    }
+    {% endif %}
+}
+{% endif %}
+# server-side
+{% if http.log.level > 0 %}
+when HTTP_RESPONSE {
+    log {{http.log.facility}}.info "$client_log_handle:> [HTTP::status] HTTP/[HTTP::version]"
+    {% if http.log.level > 1 %}
+    foreach http_header [HTTP::header names] {
+        log {{http.log.facility}}.debug "$client_log_handle:> $http_header: [HTTP::header value $http_header]"
+    }
+    {% endif %}
+}
+{% endif %}
+{% if tls.serverside.enable and tls.log.level > 0 %}
+when SERVERSSL_HANDSHAKE {
+    log {{tls.log.facility}}.info "$client_log_handle:> cipher details: name:[SSL::cipher name], version:[SSL::cipher version], bits:[SSL::cipher bits]"
+    {% if tls.log.level > 1 %}
+    set ext_count [SSL::extensions count]
+    log {{tls.log.facility}}.debug "$client_log_handle:> SSL::extensions count = $ext_count"
+
+    for {set i 0} {$i<$ext_count} {incr i} {
+        binary scan [SSL::extensions -index $i] S1S1H* ext_type ext_len ext
+        set ext_type [expr {$ext_type & 0xffff}]
+        set ext_len [expr {$ext_len & 0xffff}]
+        log {{tls.log.facility}}.debug "$client_log_handle:> SSL extension #[expr {$i + 1}]: (type $ext_type len $ext_len) $ext"
+    }
+    {% endif %}
+}
+{% endif %}
+{% if tcp.log.level > 0 %}
+when SERVER_CONNECTED {
+    log {{tcp.log.facility}}.info "$client_log_handle:> [IP::remote_addr].[TCP::remote_port] connected"
+}
+{% endif %}

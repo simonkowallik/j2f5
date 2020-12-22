@@ -1,0 +1,16 @@
+http:
+  log:
+    facility: local0
+    level: 0
+tcp:
+  log:
+    facility: local0
+    level: 0
+tls:
+  log:
+    facility: local0
+    level: 2
+  clientside:
+    enable: true
+  serverside:
+    enable: true

@@ -1,0 +1,17 @@
+# client-side
+when CLIENT_ACCEPTED {
+    set client_log_handle [IP::remote_addr].[TCP::remote_port]
+}
+when HTTP_REQUEST {
+    log local0.info "$client_log_handle:> [HTTP::method] [HTTP::uri] HTTP/[HTTP::version]"
+    foreach http_header [HTTP::header names] {
+        log local0.debug "$client_log_handle:> $http_header: [HTTP::header value $http_header]"
+    }
+}
+# server-side
+when HTTP_RESPONSE {
+    log local0.info "$client_log_handle:> [HTTP::status] HTTP/[HTTP::version]"
+    foreach http_header [HTTP::header names] {
+        log local0.debug "$client_log_handle:> $http_header: [HTTP::header value $http_header]"
+    }
+}
