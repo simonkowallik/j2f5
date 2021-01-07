@@ -1,0 +1,8 @@
+cookies:  # list of cookie names
+  - jsessionid
+  - psist
+attributes:  # force these cookie attribute+value combinations
+  - name: SameSite
+    value: None
+  - name: Secure
+    value: ""

@@ -46,7 +46,7 @@ test:
 tests: test
 
 coverage:
-	pytest --cov --cov-report=xml
+	pytest --cov=j2f5 --cov-report=xml tests/
 	coverage report -m
 	coverage html
 	$(BROWSER) htmlcov/index.html

@@ -1,0 +1,20 @@
+when HTTP_RESPONSE_RELEASE priority 850 {
+    foreach cookie [HTTP::cookie names] {
+        switch -- $cookie {
+        {# iterate over list of cookies and
+         # create a switch entry per cookie
+         #}
+        {% for cookie in cookies %}
+            {{cookie}} {
+            {# iterate over cookie attribute name+value objects
+             # and generate a command for each of them
+             #}
+            {% for attribute in attributes %}
+                HTTP::cookie attribute $cookie remove {{attribute.name}}
+                HTTP::cookie attribute $cookie insert {{attribute.name}} {{attribute.value}}
+            {% endfor %}
+            }
+        {% endfor %}
+        }
+    }
+}

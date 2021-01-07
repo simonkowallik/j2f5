@@ -1,0 +1,18 @@
+when HTTP_RESPONSE_RELEASE priority 850 {
+    foreach cookie [HTTP::cookie names] {
+        switch -- $cookie {
+            jsessionid {
+                HTTP::cookie attribute $cookie remove SameSite
+                HTTP::cookie attribute $cookie insert SameSite None
+                HTTP::cookie attribute $cookie remove Secure
+                HTTP::cookie attribute $cookie insert Secure 
+            }
+            psist {
+                HTTP::cookie attribute $cookie remove SameSite
+                HTTP::cookie attribute $cookie insert SameSite None
+                HTTP::cookie attribute $cookie remove Secure
+                HTTP::cookie attribute $cookie insert Secure 
+            }
+        }
+    }
+}

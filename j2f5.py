@@ -1,8 +1,17 @@
-# support reading templating start/end strings from the user supplied configuration
-# alter_context is called before j2_environment_params:
-# 1. Read and save context (based on user supplied configuration) in alter_context
-# 2. Read start/end strings from context in j2_environment_params
-# https://github.com/kolypto/j2cli/blob/26a67e9419d96b7f92871e8b93dba00306c5df0b/j2cli/cli.py#L183-L186
+# -*- coding: utf-8 -*-
+import sys
+from os import path
+from argparse import ArgumentError
+from j2cli import main as j2cli_main
+
+"""
+support reading templating start/end strings from the user supplied configuration
+alter_context is called before j2_environment_params:
+1. Read and save context (based on user supplied configuration) in alter_context
+2. Read start/end strings from context in j2_environment_params
+https://github.com/kolypto/j2cli/blob/26a67e9419d96b7f92871e8b93dba00306c5df0b/j2cli/cli.py#L183-L186
+"""
+
 _context = dict()
 
 # constants
@@ -56,6 +65,7 @@ def j2_environment_params():
         # use this dict to further customize or overwrite params
     )
 
+    # read templating parameters from _context
     templating_params = dict(
         # Custom block start/end strings
         block_start_string=_context.get(_TEMPLATING_NAMESPACE, {}).get(
@@ -85,7 +95,25 @@ def j2_environment_params():
         keep_trailing_newline=True,
     )
     # remove None's
-    templating_params = {k:v for (k,v) in templating_params.items() if v is not None}
+    templating_params = {k: v for (k, v) in templating_params.items() if v is not None}
 
     templating_params.update(custom_params)
     return templating_params
+
+
+def main():
+    """wrap j2 command line and automatically add j2f5.py via --customize"""
+    if "--customize" in sys.argv:
+        raise ArgumentError(
+            None,
+            "j2f5 sets --customize, hence it is not allowed as an argument. Use j2 directly to use your own customization.",
+        )
+
+    # inject args which will be read by j2cli main()
+    sys.argv.insert(1, "--customize")
+    sys.argv.insert(2, path.abspath(__file__))
+    j2cli_main()
+
+
+if __name__ == "__main__":
+    main()
