@@ -11,14 +11,14 @@
       
       
       
-        <link rel="canonical" href="https://github.com/why-j2f5/features/">
+        <link rel="canonical" href="https://github.com/why-j2f5/custom_delimiters/">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.3">
     
     
       
-        <title>Features - j2f5</title>
+        <title>Custom delimiters - j2f5</title>
       
     
     
@@ -91,7 +91,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              Features
+              Custom delimiters
             
           </span>
         </div>
@@ -209,32 +209,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../../iapp_macro_delimters/" class="md-nav__link">
-      iApp macro engine for iRules: https://techdocs.f5.com/kb/en-us/products/big-ip_ltm/manuals/product/bigip-iapps-developer-11-4-0/3.html
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-
-  <li class="md-nav__item">
-    <a href="../../mdtesting/" class="md-nav__link">
-      Mdtesting
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-
-  <li class="md-nav__item">
     <a href="../../word-of-warning/" class="md-nav__link">
       A word of warning
     </a>
@@ -251,32 +225,19 @@
   <li class="md-nav__item md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" >
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" >
     
-    <label class="md-nav__link" for="nav-5">
+    <label class="md-nav__link" for="nav-3">
       Usecases
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Usecases" data-md-level="1">
-      <label class="md-nav__title" for="nav-5">
+      <label class="md-nav__title" for="nav-3">
         <span class="md-nav__icon md-icon"></span>
         Usecases
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="../../usecases/" class="md-nav__link">
-      Index
-    </a>
-  </li>
-
         
           
           
@@ -312,7 +273,7 @@
 
   <li class="md-nav__item">
     <a href="../../usecases/preprocess/" class="md-nav__link">
-      Preprocess
+      Preprocess(or)
     </a>
   </li>
 
@@ -334,45 +295,19 @@
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
-    <label class="md-nav__link" for="nav-6">
+    <label class="md-nav__link" for="nav-4">
       Why j2f5
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Why j2f5" data-md-level="1">
-      <label class="md-nav__title" for="nav-6">
+      <label class="md-nav__title" for="nav-4">
         <span class="md-nav__icon md-icon"></span>
         Why j2f5
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="../" class="md-nav__link">
-      Index
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="../customization/" class="md-nav__link">
-      Customization
-    </a>
-  </li>
-
         
           
           
@@ -388,9 +323,22 @@
     
     
     <a href="./" class="md-nav__link md-nav__link--active">
-      Features
+      Custom delimiters
     </a>
     
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../usage/" class="md-nav__link">
+      Usage
+    </a>
   </li>
 
         
@@ -411,14 +359,65 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/simonkowallik/j2f5/edit/master/docs/why-j2f5/features.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/simonkowallik/j2f5/edit/master/docs/why-j2f5/custom_delimiters.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                  <h1>Features</h1>
+                  <h1>Custom delimiters</h1>
                 
-                
+                <p><code>j2f5</code> allows you to easily change the jinja2 delimiters. For example by including the below in your configuration (YAML in this example), the delimiters will change to something more similar to the iApp macro engine.
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">templating_settings</span><span class="p">:</span>
+  <span class="nt">block_start_string</span><span class="p">:</span> <span class="s">&#39;&lt;%&#39;</span>
+  <span class="nt">block_end_string</span><span class="p">:</span> <span class="s">&#39;%&gt;&#39;</span>
+  <span class="nt">variable_start_string</span><span class="p">:</span> <span class="s">&#39;&lt;%=&#39;</span>
+  <span class="nt">variable_end_string</span><span class="p">:</span> <span class="s">&#39;%&gt;&#39;</span>
+  <span class="nt">comment_start_string</span><span class="p">:</span> <span class="s">&#39;&lt;#&#39;</span> 
+  <span class="nt">comment_end_string</span><span class="p">:</span> <span class="s">&#39;#&gt;&#39;</span>
+</code></pre></div>
+</td></tr></table></p>
+<p>Example iRule template:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c"># lb_sorry_page.irule.j2</span>
+<span class="nv">when</span> LB_FAILED <span class="k">{</span>
+    <span class="o">&lt;</span><span class="c"># generate unique error_id and log when error.include_id is true #&gt;</span>
+    <span class="o">&lt;%</span> <span class="k">if</span> error.include_id <span class="o">%&gt;</span>
+    <span class="k">set</span> error_id <span class="k">[</span><span class="nb">lindex</span> <span class="k">[</span><span class="nv">AES</span><span class="o">::</span>key <span class="mi">128</span><span class="k">]</span> <span class="mi">2</span><span class="k">]</span>
+    <span class="nv">log</span> local0.error <span class="s2">&quot;LB failed for [FLOW::this], error_id:$error_id&quot;</span>
+    <span class="o">&lt;%</span> <span class="nv">endif</span> <span class="o">%&gt;</span>
+    <span class="nv">HTTP</span><span class="o">::</span>respond <span class="mi">503</span> content <span class="s2">&quot;&lt;html&gt;&lt;body&gt;</span>
+<span class="s2">    &lt;h1&gt;&lt;%=error.heading%&gt;&lt;/h1&gt;</span>
+<span class="s2">    &lt;p&gt;&lt;%=error.message%&gt;&lt;/p&gt;</span>
+<span class="s2">    &lt;% if error.include_id %&gt;</span>
+<span class="s2">    &lt;p&gt;error_id: $error_id&lt;/p&gt;</span>
+<span class="s2">    &lt;% endif %&gt;</span>
+<span class="s2">    &lt;/body&gt;&lt;/html&gt;&quot;</span> Connection Close
+<span class="k">}</span>
+</code></pre></div>
+</td></tr></table></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This can be helpful when <code>{ }</code> curly braces have been used for other purposes or produce issues due to TCL "overlaps" or different uses.</p>
+</div>
                 
               
               
@@ -437,7 +436,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../customization/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../../usecases/preprocess/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -446,11 +445,25 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Customization
+                Preprocess(or)
               </div>
             </div>
           </a>
         
+        
+          <a href="../usage/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Usage
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
         
       </nav>
     </div>
