@@ -19,6 +19,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Install ansible (we are after the jinja2 filters)
+        run: sudo apt-get install ansible -y
+
       - name: Install poetry
         run: pipx install poetry
 
