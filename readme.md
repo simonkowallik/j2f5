@@ -1,3 +1,8 @@
+
+# j2f5
+
+[![CI Pipeline](https://github.com/simonkowallik/j2f5/actions/workflows/ci-pipeline.yaml/badge.svg)](https://github.com/simonkowallik/j2f5/actions/workflows/ci-pipeline.yaml)
+
 `j2f5` is a customization for [j2cli](https://pypi.org/project/j2cli/), which again is a command line tool to template any kind of text based files using python's famous jinja2.
 
 `j2f5` focuses on F5 related code (specifically iRules), but isn't limited to it. It is supposed to be a relatively lightweight addition to j2cli.
